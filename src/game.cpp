@@ -3,7 +3,7 @@
 void Game::init() {
   shader = Shader("../resources/shaders/vertex.vert", "../resources/shaders/fragment.frag");
 
-  level.load();
+  level.load("resources/levels/Randsf_HeightMap.png");
   player.load("resources/models/duck.obj", "resources/textures/duck.jpg");
 
 }
@@ -60,6 +60,6 @@ void Game::setLighting() {
 
 void Game::drawPlayer() {
   if (view != FIRST_PERSON) {
-    player.draw(camera.Position, 0.06, 90, shader);
+    player.draw(camera.Position, 0.06, -90, shader);
   }
 }
