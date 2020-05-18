@@ -3,7 +3,7 @@
 void Game::init() {
   shader = Shader("../resources/shaders/vertex.vert", "../resources/shaders/fragment.frag");
 
-  level.load("resources/levels/Randsf_HeightMap.png");
+  level.load("resources/levels/heightmap.png");
   player.load("resources/models/duck.obj", "resources/textures/duck.jpg");
 
 }
