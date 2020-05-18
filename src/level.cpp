@@ -35,6 +35,7 @@ void Level::load(const std::string& filepath) {
   std::vector<Vertex> out_vertices{};
   std::vector<unsigned> out_indices{};
 
+  std::vector<glm::vec3> tmp2;
   // create a vertex for each point and assign normals and texcoords to it
   for (int i = 0; i < vertexCount; i++) {
     for (int j = 0; j < vertexCount; j++) {
@@ -48,7 +49,15 @@ void Level::load(const std::string& filepath) {
       vertex.normals = {getNormal(i, j)};
 
       vertex.texcoord = {heights[i][j], 0};
+
+      if (heights[i][j] > 0.18 && heights[i][j] < 0.26) {
+        tmp2.push_back(vertex.position);
+      }
     }
+  }
+
+  for (int i = 0; i < tmp2.size(); i += 300) {
+    treeCoords.push_back(tmp2[i]);
   }
 
   int numStripsRequired = vertexCount - 1;
@@ -96,6 +105,8 @@ void Level::load(const std::string& filepath) {
   glEnableVertexAttribArray(2);
 
   GFX_INFO("Loaded terrain.");
+
+  tree.load("resources/models/pine.obj", "resources/textures/pine.jpg");
 }
 
 // calculate the normal of a vertex with the finite difference method
@@ -127,4 +138,8 @@ void Level::draw(Shader shader) {
   // set everything to default
   glBindVertexArray(0);
   glActiveTexture(GL_TEXTURE0);
+
+  for (int i = 0; i < treeCoords.size(); i++) {
+    tree.draw(treeCoords[i] * glm::vec3(30), .003f, -90, shader);
+  }
 }

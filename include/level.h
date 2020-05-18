@@ -31,6 +31,8 @@ class Level {
     uint32_t m_vao{};
     uint32_t m_index_count;
     Texture m_texture{};
+    Model tree;
+    std::vector<glm::vec3> treeCoords;
 };
 
 #endif
