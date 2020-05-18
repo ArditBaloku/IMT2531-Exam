@@ -55,7 +55,7 @@ void Game::setUpTransformations() {
 }
 
 void Game::setLighting() {
-  shader.setDirLight(glm::vec3(-0.2f, -1.0f, -0.3f), glm::vec3(0.1f), glm::vec3(1.f), glm::vec3(0.5f));
+  shader.setDirLight(glm::vec3(0.6f, -100.0f, -0.3f), glm::vec3(0.1f), glm::vec3(.6f), glm::vec3(1.0f));
 }
 
 void Game::drawPlayer() {

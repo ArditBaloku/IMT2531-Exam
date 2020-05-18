@@ -4,7 +4,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 void Level::load(const std::string& filepath) {
-  m_texture.load_texture("resources/textures/terrain.jpeg");
+  m_texture.load_texture("resources/textures/colorscale.png");
 
   // load the heightmap
   int x, y;
@@ -20,7 +20,8 @@ void Level::load(const std::string& filepath) {
       unsigned bytePerPixel = 4;
       unsigned char* pixelOffset = pixels + (i + y * j) * bytePerPixel;
       unsigned char r = pixelOffset[0];
-      tmp.push_back((float)r/255.0);
+      tmp.push_back((float)r / 255.0);
+
     }
     heights.push_back(tmp);
   }
@@ -46,8 +47,7 @@ void Level::load(const std::string& filepath) {
 
       vertex.normals = {getNormal(i, j)};
 
-      vertex.texcoord = {(float)i / (float)(vertexCount - 1) * size,
-                      (float)j / (float)(vertexCount - 1) * size};
+      vertex.texcoord = {heights[i][j], 0};
     }
   }
 
