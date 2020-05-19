@@ -12,6 +12,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xPos, double yPos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+float cycleSpeed = 0.1;
 
 Game game;
 // timing
@@ -39,12 +40,19 @@ int main(int argc, char *argv[]) {
     deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
 
-
     game.processInput(deltaTime);
-    game.update(deltaTime);
+    game.update(deltaTime, cycleSpeed);
     game.render();
 
-    if (Config::devMode) draw_gui();
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+    ImGui::Begin("Dev Menu");
+    ImGui::SliderFloat("Cycle speed", &cycleSpeed, 0.1f, 10.f);
+    ImGui::End();
+
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     glfwSwapBuffers(window);
     glfwPollEvents();

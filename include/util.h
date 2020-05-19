@@ -70,25 +70,3 @@ void clean_up(GLFWwindow* window) {
   glfwDestroyWindow(window);
   glfwTerminate();
 }
-
-void draw_gui() {
-  if (!Config::devMode) {
-    return;
-  }
-  ImGui_ImplOpenGL3_NewFrame();
-  ImGui_ImplGlfw_NewFrame();
-  ImGui::NewFrame();
-  ImGui::Begin("Dev Menu");
-  if (ImGui::Button("Enable/Disable Flight")) {
-  }
-  if (ImGui::Button("Buttons"))
-  {
-  }
-  if (ImGui::Button("Not Implemented"))
-  {
-  }
-  ImGui::End();
-
-  ImGui::Render();
-  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-}

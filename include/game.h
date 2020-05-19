@@ -25,7 +25,7 @@ class Game {
     bool keys[1024];
     Camera camera = Camera(glm::vec3(-1.0f, 0.0f, 13.0f));
     void init();
-    void update(float dt);
+    void update(float dt, float cycleSpeed);
     void processInput(float dt);
     void render();
   private:
@@ -35,7 +35,7 @@ class Game {
     Shader shader;
     Shader skyboxShader;
     Skybox skybox = Skybox();
-    void setLighting(float dt);
+    void setLighting(float dt, float cycleSpeed);
     void setUpTransformations();
     void drawPlayer();
 };

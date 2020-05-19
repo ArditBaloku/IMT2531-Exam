@@ -14,8 +14,8 @@ void Game::init() {
 
 }
 
-void Game::update(float dt) {
-  setLighting(dt);
+void Game::update(float dt, float cycleSpeed) {
+  setLighting(dt, cycleSpeed);
 }
 
 void Game::processInput(float dt) {
@@ -65,8 +65,8 @@ void Game::setUpTransformations() {
   skyboxShader.setMat4("projection", glm::perspective(glm::radians(50.f), 16.f / 9.f, 0.01f, 650.f));
 }
 
-void Game::setLighting(float dt) {
-  accumulator += dt / 5;
+void Game::setLighting(float dt, float cycleSpeed) {
+  accumulator += dt * cycleSpeed;
 
   if (glm::sin(accumulator) < -.2f) accumulator = 0;
 
