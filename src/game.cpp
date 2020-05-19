@@ -1,5 +1,8 @@
 #include "game.h"
 
+float accumulator = 0;
+glm::vec3 color = glm::vec3(.6f, .8f, .8f);
+
 void Game::init() {
   shader = Shader("../resources/shaders/vertex.vert", "../resources/shaders/fragment.frag");
   skyboxShader = Shader("resources/shaders/skybox.vert", "resources/shaders/skybox.frag");
@@ -12,7 +15,7 @@ void Game::init() {
 }
 
 void Game::update(float dt) {
-  
+  setLighting(dt);
 }
 
 void Game::processInput(float dt) {
@@ -30,7 +33,6 @@ void Game::processInput(float dt) {
 
 void Game::render() {
   shader.reset();
-  setLighting();
   setUpTransformations();
 
   level.draw(shader);
@@ -63,8 +65,29 @@ void Game::setUpTransformations() {
   skyboxShader.setMat4("projection", projection);
 }
 
-void Game::setLighting() {
-  shader.setDirLight(glm::vec3(0.6f, -100.0f, -0.3f), glm::vec3(0.1f), glm::vec3(.6f), glm::vec3(1.0f));
+void Game::setLighting(float dt) {
+  accumulator += dt / 5;
+
+  if (glm::sin(accumulator) < -.2f) accumulator = 0;
+
+  glm::vec3 diffuseStrength = glm::vec3(glm::max(glm::sin(accumulator), .2f));
+  if (diffuseStrength.x > .4f && diffuseStrength.x < .5f) {
+    color += glm::vec3(.01f, .0f, .0f);
+  } else if (diffuseStrength.x > .2f && diffuseStrength.x < .3f) {
+    color += glm::vec3(-.01f, .0f, .0f);
+  } else if (diffuseStrength.x > .5f) {
+    color = glm::vec3(.8f, .8f, .8f);
+  } else if (diffuseStrength.x < .2f) {
+    color = glm::vec3(.6f, .8f, .8f);
+  }
+
+  shader.use();
+  shader.setDirLight(
+    glm::vec3(.6f, -1.0f, -.3f), 
+    glm::vec3(0.1f), 
+    diffuseStrength, 
+    glm::vec3(.4f), 
+    color);
 }
 
 void Game::drawPlayer() {

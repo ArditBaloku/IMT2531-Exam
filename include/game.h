@@ -35,7 +35,7 @@ class Game {
     Shader shader;
     Shader skyboxShader;
     Skybox skybox = Skybox();
-    void setLighting();
+    void setLighting(float dt);
     void setUpTransformations();
     void drawPlayer();
 };
