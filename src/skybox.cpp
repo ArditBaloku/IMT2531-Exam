@@ -55,12 +55,12 @@ float skyboxVertices[] = {
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
   std::vector<std::string> faces {
-    "resources/textures/skybox/right.jpg",
-    "resources/textures/skybox/left.jpg",
-    "resources/textures/skybox/top.jpg",
-    "resources/textures/skybox/bottom.jpg",
-    "resources/textures/skybox/front.jpg",
-    "resources/textures/skybox/back.jpg"
+    "resources/textures/skybox/right.tga",
+    "resources/textures/skybox/left.tga",
+    "resources/textures/skybox/top.tga",
+    "resources/textures/skybox/bottom.tga",
+    "resources/textures/skybox/back.tga",
+    "resources/textures/skybox/front.tga"
   };
 
   loadCubeMap(faces);
