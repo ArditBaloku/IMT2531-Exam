@@ -1,6 +1,6 @@
 #include "game.h"
 
-float accumulator = 0;
+float accumulator = 0.f;
 glm::vec3 color = glm::vec3(.6f, .8f, .8f);
 
 void Game::init() {
@@ -83,7 +83,7 @@ void Game::setLighting(float dt, float cycleSpeed) {
 
   shader.use();
   shader.setDirLight(
-    glm::vec3(.6f, -1.0f, -.3f), 
+    glm::vec3(.2f, -1.f, glm::sin(accumulator) - glm::cos(accumulator)), 
     glm::vec3(0.1f), 
     diffuseStrength, 
     glm::vec3(.4f), 
