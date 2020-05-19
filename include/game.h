@@ -12,6 +12,7 @@
 #include "model.h"
 #include "level.h"
 #include "camera.h"
+#include "skybox.h"
 
 enum CameraState {
   FIRST_PERSON,
@@ -32,6 +33,8 @@ class Game {
     Model player;
     Level level;
     Shader shader;
+    Shader skyboxShader;
+    Skybox skybox = Skybox();
     void setLighting();
     void setUpTransformations();
     void drawPlayer();

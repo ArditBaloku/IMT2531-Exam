@@ -22,6 +22,8 @@ target_sources(
     ${CMAKE_CURRENT_LIST_DIR}/include/texture.h
     ${CMAKE_CURRENT_LIST_DIR}/include/util.h
     ${CMAKE_CURRENT_LIST_DIR}/src/rendering/texture.cpp
+      ${CMAKE_CURRENT_LIST_DIR}/include/skybox.h
+    ${CMAKE_CURRENT_LIST_DIR}/src/skybox.cpp
     ${CMAKE_CURRENT_LIST_DIR}/include/config.h
     ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
 

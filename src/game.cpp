@@ -2,6 +2,9 @@
 
 void Game::init() {
   shader = Shader("../resources/shaders/vertex.vert", "../resources/shaders/fragment.frag");
+  skyboxShader = Shader("resources/shaders/skybox.vert", "resources/shaders/skybox.frag");
+
+  skybox.load();
 
   level.load("resources/levels/heightmap.png");
   player.load("resources/models/duck.obj", "resources/textures/duck.jpg");
@@ -32,6 +35,8 @@ void Game::render() {
 
   level.draw(shader);
   drawPlayer();
+
+  skybox.draw(skyboxShader);
 }
 
 void Game::setUpTransformations() {
@@ -52,6 +57,10 @@ void Game::setUpTransformations() {
 
   shader.setMat4("view", lookAt);
   shader.setMat4("projection", projection);
+
+  skyboxShader.use();
+  skyboxShader.setMat4("view", glm::mat4(glm::mat3(camera.GetFirstPersonView())));
+  skyboxShader.setMat4("projection", projection);
 }
 
 void Game::setLighting() {

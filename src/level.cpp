@@ -120,6 +120,7 @@ glm::vec3 Level::getNormal(int x, int z) {
 }
 
 void Level::draw(Shader shader) {
+  shader.use();
   auto model = glm::translate(glm::mat4(1.f), glm::vec3(0.0f));
   model = glm::scale(model, glm::vec3(30.f));
   model = glm::rotate(model, glm::radians(0.f), glm::vec3(1.0f, 0.0f, 0.0f));
