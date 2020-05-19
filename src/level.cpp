@@ -107,6 +107,7 @@ void Level::load(const std::string& filepath) {
   GFX_INFO("Loaded terrain.");
 
   tree.load("resources/models/pine.obj", "resources/textures/pine.jpg");
+  lamp.load("resources/models/cube.obj", "resources/textures/lamp.jpg");
 }
 
 // calculate the normal of a vertex with the finite difference method
@@ -140,7 +141,12 @@ void Level::draw(Shader shader) {
   glBindVertexArray(0);
   glActiveTexture(GL_TEXTURE0);
 
+  int j = 0;
   for (int i = 0; i < treeCoords.size(); i++) {
     tree.draw(treeCoords[i] * glm::vec3(30), .003f, -90, shader);
+    if (i % 30 == 0) {
+      lamp.draw(treeCoords[i] * glm::vec3(30), .3, 0, shader);
+      shader.setPointLights(treeCoords[i] * glm::vec3(30), glm::vec3(1.0f), j++);
+    }
   }
 }

@@ -38,6 +38,8 @@ struct SpotLight {
   vec3 specular;
 };
 
+#define NR_POINT_LIGHTS 12
+
 /** Inputs */    
 layout(location = 0) in vec3 normal;
 layout(location = 1) in vec2 vs_texcoords;
@@ -47,6 +49,7 @@ layout(location = 2) in vec3 fragPos;
 layout(binding = 0) uniform sampler2D texture_diffuse;
 uniform DirLight dirLight;
 uniform SpotLight spotLight;
+uniform PointLight pointLights[NR_POINT_LIGHTS];
 
 vec3 CalculateDirLight(DirLight light, vec3 normal, vec3 viewDir);
 vec3 CalculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
@@ -58,6 +61,9 @@ void main()
   vec3 viewDir = normalize(-fragPos);
 
   vec3 result = CalculateDirLight(dirLight, norm, viewDir);
+  for(int i = 0; i < NR_POINT_LIGHTS; i++){
+    result += CalculatePointLight(pointLights[i], norm, fragPos, viewDir);
+  }
 
   out_color = vec4(result, 1.0);
 }

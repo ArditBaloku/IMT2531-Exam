@@ -32,6 +32,7 @@ class Level {
     uint32_t m_index_count;
     Texture m_texture{};
     Model tree;
+    Model lamp;
     std::vector<glm::vec3> treeCoords;
 };
 
