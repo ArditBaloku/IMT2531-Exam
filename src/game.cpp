@@ -23,7 +23,7 @@ void Game::processInput(float dt) {
   if (keys[GLFW_KEY_S]) camera.ProcessKeyboard(BACKWARD, dt);
   if (keys[GLFW_KEY_A]) camera.ProcessKeyboard(LEFT, dt);
   if (keys[GLFW_KEY_D]) camera.ProcessKeyboard(RIGHT, dt);
-  if (keys[GLFW_KEY_M]) view = (view + 1) % 3;
+  if (keys[GLFW_KEY_T]) view = (view + 1) % 3;
   if (keys[GLFW_KEY_LEFT_SHIFT]) {
     camera.ProcessKeyboard(RUN, dt);
   } else {
@@ -61,7 +61,7 @@ void Game::setUpTransformations() {
   shader.setMat4("projection", projection);
 
   skyboxShader.use();
-  skyboxShader.setMat4("view", glm::mat4(glm::mat3(camera.GetFirstPersonView())));
+  skyboxShader.setMat4("view", glm::mat4(glm::mat3(lookAt)));
   skyboxShader.setMat4("projection", glm::perspective(glm::radians(50.f), 16.f / 9.f, 0.01f, 650.f));
 }
 

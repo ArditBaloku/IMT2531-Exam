@@ -73,7 +73,7 @@ class Camera {
 
   // Birds eye view
   glm::mat4 Get2DView() {
-    return glm::lookAt(glm::vec3(Position.x, Position.y + 15.0f, Position.z), Position, glm::vec3(0.0f, 0.0f, -1.0f));
+    return glm::lookAt(glm::vec3(76.f, 39.f, 303.f), glm::vec3(86.f, 36.f, 298.f), glm::vec3(0.0f, 1.0f, 0.0f));
   }
 
   // Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined
