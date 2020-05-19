@@ -1,7 +1,8 @@
 #include "game.h"
 
-float accumulator = 0.f;
+float accumulator = 0.0f;
 glm::vec3 color = glm::vec3(.6f, .8f, .8f);
+float eagleRotation = 180.0f;
 
 void Game::init() {
   shader = Shader("../resources/shaders/vertex.vert", "../resources/shaders/fragment.frag");
@@ -11,7 +12,8 @@ void Game::init() {
 
   level.load("resources/levels/heightmap.png");
   player.load("resources/models/duck.obj", "resources/textures/duck.jpg");
-
+  eagle.load("resources/models/eagle.obj", "resources/textures/eagle.tga");
+  deer.load("resources/models/deer.obj", "resources/textures/deer.jpg");
 }
 
 void Game::update(float dt, float cycleSpeed) {
@@ -37,6 +39,8 @@ void Game::render() {
 
   level.draw(shader);
   drawPlayer();
+
+  drawObjects();
 
   skybox.draw(skyboxShader);
 }
@@ -92,6 +96,15 @@ void Game::setLighting(float dt, float cycleSpeed) {
 
 void Game::drawPlayer() {
   if (view != FIRST_PERSON) {
-    player.draw(camera.Position, 0.06, -90, shader);
+    player.draw(camera.Position, 0.06, glm::vec3(-90, 0, 0), shader);
   }
+}
+
+void Game::drawObjects() {
+  eagleRotation += 1.65f;
+  if (eagleRotation > 360) eagleRotation = 0;
+
+  player.draw(glm::vec3(285, 1 + glm::clamp(glm::cos(glfwGetTime()), -.3 ,.2), 240 + glm::sin(glfwGetTime())), 0.02, glm::vec3(-90, 0, 0), shader);
+  eagle.draw(glm::vec3(285 + 3*glm::sin(glfwGetTime()), 20 + glm::sin(glfwGetTime()), 240 + 3*glm::cos(glfwGetTime())), .03, glm::vec3(0, eagleRotation, 0), shader);
+  deer.draw(glm::vec3(308, 4.2, 201), .02, glm::vec3(-90, 0, 0), shader);
 }

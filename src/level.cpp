@@ -143,9 +143,9 @@ void Level::draw(Shader shader) {
 
   int j = 0;
   for (int i = 0; i < treeCoords.size(); i++) {
-    tree.draw(treeCoords[i] * glm::vec3(30), .003f, -90, shader);
+    tree.draw(treeCoords[i] * glm::vec3(30), .003f, glm::vec3(-90, 0, 0), shader);
     if (i % 30 == 0) {
-      lamp.draw(treeCoords[i] * glm::vec3(30), .3, 0, shader);
+      lamp.draw(treeCoords[i] * glm::vec3(30), .3, glm::vec3(0), shader);
       shader.setPointLights(treeCoords[i] * glm::vec3(30), glm::vec3(1.0f), j++);
     }
   }

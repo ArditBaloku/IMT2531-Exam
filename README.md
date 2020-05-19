@@ -32,16 +32,16 @@ Additional features:
 
 ## Task 3
 
-- [ ] Load air, land and water animals. Make them move around.
+- [x] Load air, land and water animals. Make them move around.
 - [x] Avoid objects moving through the ground
 - [ ] Allow the user to switch between the objects and control them
 
 Additional features:
 
 - [ ] Make your own custom object loader
-- [ ] Make the air model move in 3D
-- [ ] Move the objects systematically
-- [ ] Make the fish jump in and out of water, or the duck dive under
+- [x] Make the air model move in 3D
+- [x] Move the objects systematically
+- [x] Make the fish jump in and out of water, or the duck dive under
 - [ ] Animate a model
 - [ ] Add sound to some models
 - [ ] Let the user choose between following the movement of the objects or control the model

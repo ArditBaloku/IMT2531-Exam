@@ -31,6 +31,8 @@ class Game {
   private:
     int view = 0;
     Model player;
+    Model eagle;
+    Model deer;
     Level level;
     Shader shader;
     Shader skyboxShader;
@@ -38,6 +40,7 @@ class Game {
     void setLighting(float dt, float cycleSpeed);
     void setUpTransformations();
     void drawPlayer();
+    void drawObjects();
 };
 
 #endif
