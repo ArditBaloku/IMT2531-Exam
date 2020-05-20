@@ -68,7 +68,7 @@ class Camera {
 
   // Third person view
   glm::mat4 GetThirdPersonView() {
-    return glm::lookAt(glm::vec3(Position.x - Front.x, Position.y - Front.y, Position.z - Front.z), Position + Front, Up);
+    return glm::lookAt(glm::vec3(Position.x - 4 * Front.x, Position.y - 4 * Front.y, Position.z - 4 * Front.z), Position + Front, Up);
   }
 
   // Birds eye view

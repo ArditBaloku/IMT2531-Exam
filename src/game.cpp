@@ -100,7 +100,7 @@ void Game::setLighting(float dt, float cycleSpeed) {
 
 void Game::drawPlayer() {
   if (view != FIRST_PERSON) {
-    player.draw(camera.Position, 0.06, glm::vec3(-90, 0, 0), shader);
+    player.draw(camera.Position, 0.02, glm::vec3(-90, 0, 0), shader);
   }
 }
 
