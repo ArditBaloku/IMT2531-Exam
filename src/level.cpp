@@ -21,7 +21,6 @@ void Level::load(const std::string& filepath) {
       unsigned char* pixelOffset = pixels + (i + y * j) * bytePerPixel;
       unsigned char r = pixelOffset[0];
       tmp.push_back((float)r / 255.0);
-
     }
     heights.push_back(tmp);
   }
@@ -60,6 +59,7 @@ void Level::load(const std::string& filepath) {
     treeCoords.push_back(tmp2[i]);
   }
 
+  // calculate indices
   int numStripsRequired = vertexCount - 1;
   int numDegensRequired = 2 * (numStripsRequired - 1);
   int verticesPerStrip = 2 * vertexCount;
@@ -84,6 +84,7 @@ void Level::load(const std::string& filepath) {
 
   m_index_count = out_indices.size();
   
+  // create and load the buffers with data
   glGenVertexArrays(1, &m_vao);
   glBindVertexArray(m_vao);
 
@@ -106,6 +107,7 @@ void Level::load(const std::string& filepath) {
 
   GFX_INFO("Loaded terrain.");
 
+  // load objects
   tree.load("resources/models/pine.obj", "resources/textures/pine.jpg");
   lamp.load("resources/models/cube.obj", "resources/textures/lamp.jpg");
 }
@@ -141,6 +143,7 @@ void Level::draw(Shader shader) {
   glBindVertexArray(0);
   glActiveTexture(GL_TEXTURE0);
 
+  // draw trees and draw a lamp for every 30th tree
   int j = 0;
   for (int i = 0; i < treeCoords.size(); i++) {
     tree.draw(treeCoords[i] * glm::vec3(30), .003f, glm::vec3(-90, 0, 0), shader);

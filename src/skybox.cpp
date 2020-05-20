@@ -54,6 +54,7 @@ float skyboxVertices[] = {
   glEnableVertexAttribArray(0);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
+  // order the cubemap faces so they are loaded in the right order
   std::vector<std::string> faces {
     "resources/textures/skybox/right.tga",
     "resources/textures/skybox/left.tga",

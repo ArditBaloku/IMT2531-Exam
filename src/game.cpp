@@ -42,6 +42,7 @@ void Game::render() {
 
   drawObjects();
 
+  // skybox is drawn last
   skybox.draw(skyboxShader);
 }
 
@@ -65,6 +66,8 @@ void Game::setUpTransformations() {
   shader.setMat4("projection", projection);
 
   skyboxShader.use();
+
+  // remove any translation transformations from the lookAt matrix to use in the skyboxShader 
   skyboxShader.setMat4("view", glm::mat4(glm::mat3(lookAt)));
   skyboxShader.setMat4("projection", glm::perspective(glm::radians(50.f), 16.f / 9.f, 0.01f, 650.f));
 }
@@ -74,6 +77,7 @@ void Game::setLighting(float dt, float cycleSpeed) {
 
   if (glm::sin(accumulator) < -.2f) accumulator = 0;
 
+  // increase/decrease the red/blue values in the color to emulate sunrise/sunset
   glm::vec3 diffuseStrength = glm::vec3(glm::max(glm::sin(accumulator), .2f));
   if (diffuseStrength.x > .4f && diffuseStrength.x < .5f) {
     color += glm::vec3(.01f, .0f, .0f);
@@ -87,7 +91,7 @@ void Game::setLighting(float dt, float cycleSpeed) {
 
   shader.use();
   shader.setDirLight(
-    glm::vec3(.2f, -1.f, glm::sin(accumulator) - glm::cos(accumulator)), 
+    glm::vec3(.2f, -1.f, glm::sin(accumulator) - glm::cos(accumulator)), // emulates the sun and moon going around
     glm::vec3(0.1f), 
     diffuseStrength, 
     glm::vec3(.4f), 

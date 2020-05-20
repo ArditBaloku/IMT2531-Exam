@@ -44,13 +44,14 @@ int main(int argc, char *argv[]) {
     game.update(deltaTime, cycleSpeed);
     game.render();
 
+    // draw the GUI
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
     ImGui::Begin("Dev Menu");
     ImGui::SliderFloat("Cycle speed", &cycleSpeed, 0.1f, 10.f);
     ImGui::End();
-
+    
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
