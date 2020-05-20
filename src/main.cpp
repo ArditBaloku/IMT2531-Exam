@@ -13,6 +13,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xPos, double yPos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 float cycleSpeed = 0.1;
+bool fog = false;
+bool lastCtrl = false;
 
 Game game;
 // timing
@@ -41,7 +43,7 @@ int main(int argc, char *argv[]) {
     lastFrame = currentFrame;
 
     game.processInput(deltaTime);
-    game.update(deltaTime, cycleSpeed);
+    game.update(deltaTime, cycleSpeed, fog);
     game.render();
 
     // draw the GUI
@@ -50,6 +52,7 @@ int main(int argc, char *argv[]) {
     ImGui::NewFrame();
     ImGui::Begin("Dev Menu");
     ImGui::SliderFloat("Cycle speed", &cycleSpeed, 0.1f, 10.f);
+    ImGui::Checkbox("Fog", &fog);
     ImGui::End();
     
     ImGui::Render();
@@ -65,6 +68,15 @@ int main(int argc, char *argv[]) {
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) {
   if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) glfwSetWindowShouldClose(window, true);
+  if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
+    if (lastCtrl) {
+      lastCtrl = false;
+      glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    } else {
+      lastCtrl = true;
+      glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    }
+  }
   if (key >= 0 && key < 1024)
     if (action == GLFW_PRESS) {
       game.keys[key] = true;
@@ -72,6 +84,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
       game.keys[key] = false;
     }
 }
-void mouse_callback(GLFWwindow* window, double xPos, double yPos) { game.camera.ProcessMouseMovement(xPos, yPos); }
+void mouse_callback(GLFWwindow* window, double xPos, double yPos) { if (!lastCtrl) game.camera.ProcessMouseMovement(xPos, yPos); }
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) { glViewport(0, 0, width, height); }
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) { game.camera.ProcessMouseScroll(yoffset); }

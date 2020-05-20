@@ -44,6 +44,7 @@ struct SpotLight {
 layout(location = 0) in vec3 normal;
 layout(location = 1) in vec2 vs_texcoords;
 layout(location = 2) in vec3 fragPos;
+layout(location = 3) in float visibility;
 
 /** Texture sampler */
 layout(binding = 0) uniform sampler2D texture_diffuse;
@@ -65,7 +66,7 @@ void main()
     result += CalculatePointLight(pointLights[i], norm, fragPos, viewDir);
   }
 
-  out_color = vec4(result, 1.0);
+  out_color = mix(vec4(0.5, 0.5, 0.5, 1.0), vec4(result, 1.0), visibility);
 }
 
 vec3 CalculateDirLight(DirLight light, vec3 normal, vec3 viewDir)

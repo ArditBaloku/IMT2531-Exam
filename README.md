@@ -46,6 +46,10 @@ Additional features:
 - [ ] Add sound to some models
 - [ ] Let the user choose between following the movement of the objects or control the model
 
+## Out of scope features
+
+- [x] Fog
+
 # How to setup
 
 Make sure you have [cmake](https://cmake.org/) version 3.14 or later installed.
@@ -83,7 +87,9 @@ D - Move camera right
 
 T - Switch between first-person, third-person and global view
 
-LShift - Sprint
+LShift - Move faster
+
+LCtrl (Hold) - Enable mouse
 
 Esc - Exit
 

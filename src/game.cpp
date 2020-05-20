@@ -16,8 +16,9 @@ void Game::init() {
   deer.load("resources/models/deer.obj", "resources/textures/deer.jpg");
 }
 
-void Game::update(float dt, float cycleSpeed) {
+void Game::update(float dt, float cycleSpeed, bool fog) {
   setLighting(dt, cycleSpeed);
+  shader.setBool("fog", fog);
 }
 
 void Game::processInput(float dt) {
