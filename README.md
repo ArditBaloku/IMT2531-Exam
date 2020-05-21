@@ -91,6 +91,8 @@ LShift - Move faster
 
 LCtrl (Hold) - Enable mouse
 
+Scroll Wheel - Zoom in/out
+
 Esc - Exit
 
 Arrow keys - Navigate the menu
